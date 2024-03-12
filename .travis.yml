@@ -9,14 +9,14 @@ script:
 
 after_success:
   - eval $(aws ecr get-login --region eu-south-1)
-  - docker build -t andreadadru/multi-client -f ./client
-  - docker build -t andreadadru/multi-nginx -f ./nginx
-  - docker build -t andreadadru/multi-server -f ./server
-  - docker build -t andreadadru/multi-worker -f ./worker
-  - docker tag andreadadru/multi-client 542236349330.dkr.ecr.eu-south-1.amazonaws.com/multi-client:$TRAVIS_BUILD_ID
-  - docker tag andreadadru/multi-nginx 542236349330.dkr.ecr.eu-south-1.amazonaws.com/multi-nginx:$TRAVIS_BUILD_ID
-  - docker tag andreadadru/multi-server 542236349330.dkr.ecr.eu-south-1.amazonaws.com/multi-server:$TRAVIS_BUILD_ID
-  - docker tag andreadadru/multi-worker 542236349330.dkr.ecr.eu-south-1.amazonaws.com/multi-worker:$TRAVIS_BUILD_ID
+  - docker build -t andreadadru/multi-client:$TRAVIS_BUILD_ID -f ./client
+  - docker build -t andreadadru/multi-nginx:$TRAVIS_BUILD_ID -f ./nginx
+  - docker build -t andreadadru/multi-server:$TRAVIS_BUILD_ID -f ./server
+  - docker build -t andreadadru/multi-worker:$TRAVIS_BUILD_ID -f ./worker
+  - docker tag andreadadru/multi-client:$TRAVIS_BUILD_ID 542236349330.dkr.ecr.eu-south-1.amazonaws.com/multi-client:$TRAVIS_BUILD_ID
+  - docker tag andreadadru/multi-nginx:$TRAVIS_BUILD_ID 542236349330.dkr.ecr.eu-south-1.amazonaws.com/multi-nginx:$TRAVIS_BUILD_ID
+  - docker tag andreadadru/multi-server:$TRAVIS_BUILD_ID 542236349330.dkr.ecr.eu-south-1.amazonaws.com/multi-server:$TRAVIS_BUILD_ID
+  - docker tag andreadadru/multi-worker:$TRAVIS_BUILD_ID 542236349330.dkr.ecr.eu-south-1.amazonaws.com/multi-worker:$TRAVIS_BUILD_ID
   - docker push 542236349330.dkr.ecr.eu-south-1.amazonaws.com/multi-client:$TRAVIS_BUILD_ID
   - docker push 542236349330.dkr.ecr.eu-south-1.amazonaws.com/multi-nginx:$TRAVIS_BUILD_ID
   - docker push 542236349330.dkr.ecr.eu-south-1.amazonaws.com/multi-server:$TRAVIS_BUILD_ID
