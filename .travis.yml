@@ -1,0 +1,16 @@
+sudo: required
+language: generic
+services:
+  - docker
+before_install:
+  - docker build -t andreadadru/client-test -f ./client/Dockerfile.dev ./client
+script:
+  - docker run -e CI=true andreadadru/client-test npm test -- --coverage
+
+after_success:
+  - docker build -t andreadadru/multi-client -f ./client
+  - docker build -t andreadadru/multi-nginx -f ./nginx
+  - docker build -t andreadadru/multi-server -f ./server
+  - docker build -t andreadadru/multi-worker -f ./worker
+
+deploy:
