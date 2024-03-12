@@ -8,7 +8,8 @@ script:
   - docker run -e CI=true andreadadru/client-test npm test -- --coverage
 
 after_success:
-  - eval $(aws ecr get-login --no-include-email --region eu-south-1)
+  #- eval $(aws ecr get-login --no-include-email --region eu-south-1)
+  - docker login -u AWS -p $(aws ecr get-login-password --region eu-south-1) 542236349330.dkr.ecr.eu-south-1.amazonaws.com
   - docker build -t andreadadru/multi-client:$TRAVIS_BUILD_ID ./client
   - docker build -t andreadadru/multi-nginx:$TRAVIS_BUILD_ID ./nginx
   - docker build -t andreadadru/multi-server:$TRAVIS_BUILD_ID ./server
