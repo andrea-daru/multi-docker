@@ -1,0 +1,36 @@
+{
+  "AWSEBDockerrunVersion": 2,
+  "containerDefinitions": [
+    {
+      "name": "client",
+      "image": "542236349330.dkr.ecr.eu-south-1.amazonaws.com/multi-client:latest",
+      "hostname": "client",
+      "essential": false
+    },
+    {
+      "name": "server",
+      "image": "542236349330.dkr.ecr.eu-south-1.amazonaws.com/multi-server:latest",
+      "hostname": "api",
+      "essential": false
+    },
+    {
+      "name": "worker",
+      "image": "542236349330.dkr.ecr.eu-south-1.amazonaws.com/multi-worker:latest",
+      "hostname": "worker",
+      "essential": false
+    },
+    {
+      "name": "nginx",
+      "image": "542236349330.dkr.ecr.eu-south-1.amazonaws.com/multi-nginx:latest",
+      "hostname": "nginx",
+      "essential": true,
+      "portMappings": [
+        {
+          "hostPort": 80,
+          "containerPort": 80
+        }
+      ],
+      "links": ["client", "server"]
+    }
+  ]
+}
