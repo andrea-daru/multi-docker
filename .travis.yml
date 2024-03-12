@@ -9,10 +9,10 @@ script:
 
 after_success:
   - eval $(aws ecr get-login --region eu-south-1)
-  - docker build -t andreadadru/multi-client:$TRAVIS_BUILD_ID -f ./client
-  - docker build -t andreadadru/multi-nginx:$TRAVIS_BUILD_ID -f ./nginx
-  - docker build -t andreadadru/multi-server:$TRAVIS_BUILD_ID -f ./server
-  - docker build -t andreadadru/multi-worker:$TRAVIS_BUILD_ID -f ./worker
+  - docker build -t andreadadru/multi-client:$TRAVIS_BUILD_ID ./client
+  - docker build -t andreadadru/multi-nginx:$TRAVIS_BUILD_ID ./nginx
+  - docker build -t andreadadru/multi-server:$TRAVIS_BUILD_ID ./server
+  - docker build -t andreadadru/multi-worker:$TRAVIS_BUILD_ID ./worker
   - docker tag andreadadru/multi-client:$TRAVIS_BUILD_ID 542236349330.dkr.ecr.eu-south-1.amazonaws.com/multi-client:$TRAVIS_BUILD_ID
   - docker tag andreadadru/multi-nginx:$TRAVIS_BUILD_ID 542236349330.dkr.ecr.eu-south-1.amazonaws.com/multi-nginx:$TRAVIS_BUILD_ID
   - docker tag andreadadru/multi-server:$TRAVIS_BUILD_ID 542236349330.dkr.ecr.eu-south-1.amazonaws.com/multi-server:$TRAVIS_BUILD_ID
