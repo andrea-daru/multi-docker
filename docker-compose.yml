@@ -1,11 +1,11 @@
 version: "3"
 services:
   client:
-    image: "rallycoding/multi-client"
+    image: "542236349330.dkr.ecr.eu-south-1.amazonaws.com/multi-client:latest"
     mem_limit: 128m
     hostname: client
   server:
-    image: "rallycoding/multi-server"
+    image: "542236349330.dkr.ecr.eu-south-1.amazonaws.com/multi-server:latest"
     mem_limit: 128m
     hostname: api
     environment:
@@ -17,14 +17,14 @@ services:
       - PGPASSWORD=$PGPASSWORD
       - PGPORT=$PGPORT
   worker:
-    image: "rallycoding/multi-worker"
+    image: "542236349330.dkr.ecr.eu-south-1.amazonaws.com/multi-worker:latest"
     mem_limit: 128m
     hostname: worker
     environment:
       - REDIS_HOST=$REDIS_HOST
       - REDIS_PORT=$REDIS_PORT
   nginx:
-    image: "rallycoding/multi-nginx"
+    image: "542236349330.dkr.ecr.eu-south-1.amazonaws.com/multi-nginx:latest"
     mem_limit: 128m
     hostname: nginx
     ports:
