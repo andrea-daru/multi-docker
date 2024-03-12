@@ -15,14 +15,14 @@ after_success:
   - ./ecr_credentials.sh
   - if ! [ -x "$(command -v aws)" ]; then curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip" ; unzip awscliv2.zip ; sudo ./aws/install ; fi
   - docker login -u AWS -p $(aws ecr get-login-password --region eu-south-1) $AWS_ECS_URL
-  - docker build -t multi-client:$TRAVIS_BUILD_ID -t $AWS_ECS_URL/multi-client:$TRAVIS_BUILD_ID -t $AWS_ECS_URL/multi-client:latest ./client
-  - docker build -t multi-nginx:$TRAVIS_BUILD_ID -t $AWS_ECS_URL/multi-nginx:$TRAVIS_BUILD_ID -t $AWS_ECS_URL/multi-nginx:latest ./nginx
-  - docker build -t multi-server:$TRAVIS_BUILD_ID -t $AWS_ECS_URL/multi-server:$TRAVIS_BUILD_ID -t $AWS_ECS_URL/multi-server:latest ./server
-  - docker build -t multi-worker:$TRAVIS_BUILD_ID -t $AWS_ECS_URL/multi-worker:$TRAVIS_BUILD_ID -t $AWS_ECS_URL/multi-worker:latest ./worker
-  #- docker tag multi-client:$TRAVIS_BUILD_ID $AWS_ECS_URL/multi-client:$TRAVIS_BUILD_ID
-  #- docker tag multi-nginx:$TRAVIS_BUILD_ID $AWS_ECS_URL/multi-nginx:$TRAVIS_BUILD_ID
-  #- docker tag multi-server:$TRAVIS_BUILD_ID $AWS_ECS_URL/multi-server:$TRAVIS_BUILD_ID
-  #- docker tag multi-worker:$TRAVIS_BUILD_ID $AWS_ECS_URL/multi-worker:$TRAVIS_BUILD_ID
+  - docker build -t andreadaru/multi-client:$TRAVIS_BUILD_ID -t $AWS_ECS_URL/multi-client:$TRAVIS_BUILD_ID -t $AWS_ECS_URL/multi-client:latest ./client
+  - docker build -t andreadaru/multi-nginx:$TRAVIS_BUILD_ID -t $AWS_ECS_URL/multi-nginx:$TRAVIS_BUILD_ID -t $AWS_ECS_URL/multi-nginx:latest ./nginx
+  - docker build -t andreadaru/multi-server:$TRAVIS_BUILD_ID -t $AWS_ECS_URL/multi-server:$TRAVIS_BUILD_ID -t $AWS_ECS_URL/multi-server:latest ./server
+  - docker build -t andreadaru/multi-worker:$TRAVIS_BUILD_ID -t $AWS_ECS_URL/multi-worker:$TRAVIS_BUILD_ID -t $AWS_ECS_URL/multi-worker:latest ./worker
+  #- docker tag andreadaru/multi-client:$TRAVIS_BUILD_ID $AWS_ECS_URL/multi-client:$TRAVIS_BUILD_ID
+  #- docker tag andreadaru/multi-nginx:$TRAVIS_BUILD_ID $AWS_ECS_URL/multi-nginx:$TRAVIS_BUILD_ID
+  #- docker tag andreadaru/multi-server:$TRAVIS_BUILD_ID $AWS_ECS_URL/multi-server:$TRAVIS_BUILD_ID
+  #- docker tag andreadaru/multi-worker:$TRAVIS_BUILD_ID $AWS_ECS_URL/multi-worker:$TRAVIS_BUILD_ID
   - docker push $AWS_ECS_URL/multi-client --all-tags
   - docker push $AWS_ECS_URL/multi-nginx --all-tags
   - docker push $AWS_ECS_URL/multi-server --all-tags
