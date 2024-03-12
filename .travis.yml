@@ -2,7 +2,6 @@ sudo: required
 language: generic
 env:
   - AWS_ECR_URL=542236349330.dkr.ecr.eu-south-1.amazonaws.com
-  -
 services:
   - docker
 before_install:
@@ -30,6 +29,7 @@ after_success:
   - docker push $AWS_ECS_URL/multi-worker --all-tags
 
 deploy:
+  provider: elasticbeanstalk
   region: "eu-south-1"
   app: "multi-docker"
   env: "MultiDocker-env"
